@@ -35,6 +35,7 @@ function onSignIn(googleUser) {
 $("#cat_btn").click((e) => {
     e.preventDefault()
     getRandomCatPicture()
+    getRandomCatFacts()
 })
 
 const cat_result = document.getElementById("cat_result")
@@ -45,6 +46,19 @@ async function getRandomCatPicture() {
             method: "get",
         })
         cat_result.innerHTML = `<img src=${response.data[0].url} alt="cat" />`
+    } catch (err) {
+        throw err.message
+    }
+}
+
+const cat_fact = document.getElementById("cat_fact")
+async function getRandomCatFacts() {
+    try {
+        const response = await axios({
+            url: base_url + `cat-facts`,
+            method: "get"
+        })
+        cat_fact.innerHTML = `<h3>${response.data}</h3>`
     } catch (err) {
         throw err.message
     }
