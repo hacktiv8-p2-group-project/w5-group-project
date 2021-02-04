@@ -1,15 +1,15 @@
 $(document).ready(() => {
-  auth()
+    auth()
 })
 
 const base_url = "http://localhost:3000/"
 
 function auth() {
-  if (!localStorage.getItem("access_token")) {
-    //
-  } else {
-    //
-  }
+    if (!localStorage.getItem("access_token")) {
+        //
+    } else {
+        //
+    }
 }
 
 function onSignIn(googleUser) {
@@ -27,6 +27,12 @@ function onSignIn(googleUser) {
     .catch((err) => {
       console.log(err)
     })
+        .done((res) => {
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
 }
 
 // const cat_btn = document.getElementById("cat_btn")

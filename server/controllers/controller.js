@@ -50,10 +50,9 @@ class Controller {
     })
   }
 
-  static googleLogin(req, res, next) {
-    const client = new OAuth2Client(process.env.CLIENT_ID)
-    let email = ""
-
+    static googleLogin(req, res, next) {
+        const client = new OAuth2Client(process.env.CLIENT_ID)
+        let email = ""
     client
       .verifyIdToken({
         idToken: req.body.google_token,
