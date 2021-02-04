@@ -14,6 +14,7 @@ router.post("/login", Controller.login)
 
 router.post("/googleLogin", Controller.googleLogin)
 
+router.use(authenticate)
 router.get("/cat-facts", CatFactsController.getCatFacts)
 
 router.get("/cat-pictures", CatPictureController.getCatPicture)
