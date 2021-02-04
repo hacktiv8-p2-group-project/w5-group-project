@@ -44,7 +44,26 @@
             <div>
                 <!-- !!!!!INPUT CODE HERE!!!!! -->
                 <!-- GOOGLE LOGIN -->
-                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                <div>
+                  <form id="loginform">
+                      <h3>Login</h3>
+                      <label>Email</label><br>
+                      <input id="loginemail" type="text"><br><br>
+                      <label>Password</label><br>
+                      <input type="password"><br><br>
+                      <button id="loginsubmit" type="submit">Login</button><br>
+                      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                  </form>
+                  <form id="registerform">
+                      <h3>Register</h3>
+                    <label>Email</label><br>
+                    <input id="registeremail" type="text"><br><br>
+                    <label>Password</label><br>
+                    <input id="registerpassword" type="text"><br><br>
+                    <button id="registersubmit" type="submit">Register</button><br>
+                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                </form>  
+                </div>
             </div>
             <!-- CAT PICTURE AND CAT FACT -->
             <div>
