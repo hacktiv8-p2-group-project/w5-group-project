@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken")
  */
 function authenticate(req, res, next) {
     try {
-        const token = req.headers.token
+        const token = req.headers.access_token
         // @ts-ignore
         const decoded = jwt.verify(token, process.env.SECRET_JWT)
         // @ts-ignore
