@@ -1,48 +1,51 @@
 $(document).ready(() => {
-  auth()
+    auth()
 })
 
 const base_url = "http://localhost:3000/"
 
 function auth() {
-  if (!localStorage.getItem("access_token")) {
-    //
-  } else {
-    //
-  }
+    if (!localStorage.getItem("access_token")) {
+        //
+    } else {
+        //
+    }
 }
 
 function onSignIn(googleUser) {
-  var id_token = googleUser.getAuthResponse().id_token;
-  $.ajax({
-    url: base_url + `googleLogin`,
-    method: "POST",
-    data: {
-      google_token: id_token
-    }
-  })
-    .done(res => {
-      console.log(res);
+    var id_token = googleUser.getAuthResponse().id_token
+    $.ajax({
+        url: base_url + `googleLogin`,
+        method: "POST",
+        data: {
+            google_token: id_token,
+        },
     })
-    .catch(err => {
-      console.log(err);
-    })
+        .done((res) => {
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
 }
 
-
 // const cat_btn = document.getElementById("cat_btn")
-// const cat_result = document.getElementById("cat_result")
-
 // cat_btn.addEventListener("click", getRandomCat)
 
-// function getRandomCat() {
-//     fetch("https://aws.random.cat/meow")
-//         .then((res) => res.json())
-//         .then((data) => {
-//             cat_result.innerHTML = `<img src=${data.file} alt="cat" />`
-//         })
-// }
-
 $("#cat_btn").click((e) => {
-  e.preventDefault()
+    e.preventDefault()
+    getRandomCatPicture()
 })
+
+const cat_result = document.getElementById("cat_result")
+async function getRandomCatPicture() {
+    try {
+        const response = await axios({
+            url: base_url + `cat-pictures`,
+            method: "get",
+        })
+        cat_result.innerHTML = `<img src=${response.data[0].url} alt="cat" />`
+    } catch (err) {
+        throw err.message
+    }
+}
