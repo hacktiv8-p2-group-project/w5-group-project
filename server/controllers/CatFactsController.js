@@ -1,18 +1,18 @@
-const axios = require('axios')
+const axios = require('axios');
 
 class CatFactsController {
-  static getCatFacts(req, res, next) {
-    axios({
-      method: "get",
-      url: `https://cat-fact.herokuapp.com/facts/random`
-    })
-    .then((result) => {
-      res.status(200).json(result.text)
-    })
-    .catch((err) => {
-      next(err)
-    });
-  }
+  static async getCatFacts(req, res, next) {
+    try {
+        const respond = await axios({
+            method: "get",
+            url: `https://cat-fact.herokuapp.com/facts/random`,
+        })
+        console.log(respond)
+        res.status(200).json(respond.data.text)
+    } catch (err) {
+        next(err)
+    }
+}
 }
 
 module.exports = CatFactsController
