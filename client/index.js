@@ -111,34 +111,44 @@ function onSignIn(googleUser) {
     },
   })
     .done((res) => {
-      console.log(res)
+      auth()
     })
-    .catch((err) => {
-      console.log(err)
-    })
-    .done((res) => {
-      console.log(res)
-    })
-    .catch((err) => {
-      console.log(err)
+    .fail((xhr, txt) => {
+      console.log(xhr, txt);
     })
 }
 
-const cat_result = document.getElementById("cat_result")
-async function getRandomCatPicture() {
-  try {
-    const response = await axios({
-      url: base_url + `cat-pictures`,
-      method: "get",
-      headers: {
-        access_token: localStorage.getItem("access_token")
-      }
+function getRandomCatPicture() {
+  $.ajax({
+    url: base_url + `cat-pictures`,
+    method: "GET",
+    headers: {
+      access_token: localStorage.getItem("access_token")
+    }
+  })
+    .done(res => {
+      $("#cat_result").html(`<img src=${res[0].url} alt="cat" />`)
     })
-    cat_result.innerHTML = `<img src=${response.data[0].url} alt="cat" />`
-  } catch (err) {
-    throw err.message
-  }
+    .fail((xhr, txt) => {
+      console.log(xhr, txt);
+    })
 }
+
+// const cat_result = document.getElementById("cat_result")
+// async function getRandomCatPicture() {
+//   try {
+//     const response = await axios({
+//       url: base_url + `cat-pictures`,
+//       method: "get",
+//       headers: {
+//         access_token: localStorage.getItem("access_token")
+//       }
+//     })
+//     cat_result.innerHTML = `<img src=${response.data[0].url} alt="cat" />`
+//   } catch (err) {
+//     throw err.message
+//   }
+// }
 
 const cat_fact = document.getElementById("cat_fact")
 async function getRandomCatFacts() {
