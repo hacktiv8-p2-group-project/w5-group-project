@@ -11,7 +11,7 @@ class CatPictureController {
                     "x-api-key": process.env.X_API_KEY,
                 },
             })
-            console.log(response)
+            // console.log(response)
             res.status(200).json(response.data)
         } catch (err) {
             next(err)

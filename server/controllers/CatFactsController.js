@@ -1,14 +1,14 @@
 const axios = require("axios")
 
 class CatFactsController {
-    static getCatFacts(req, res, next) {
+    static async getCatFacts(req, res, next) {
         try {
-            const respond = axios({
+            const respond = await axios({
                 method: "get",
                 url: `https://cat-fact.herokuapp.com/facts/random`,
             })
-            console.log(respond)
-            res.status(200).json(respond.text)
+            // console.log(respond)
+            res.status(200).json(respond.data.text)
         } catch (err) {
             next(err)
         }
