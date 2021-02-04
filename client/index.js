@@ -27,6 +27,10 @@ $(document).ready(() => {
     getRandomCatPicture()
     getRandomCatFacts()
   })
+  $("#cat_btn_breed").click((e) => {
+    e.preventDefault()
+    getRandomCatBreeds()
+  })
 })
 
 const base_url = "http://localhost:3000/"
@@ -150,7 +154,24 @@ async function getRandomCatFacts() {
         access_token: localStorage.getItem("access_token")
       }
     })
-    cat_fact.innerHTML = `<h3>${response.data}</h3>`
+    cat_fact.innerHTML = `<h5>${response.data}</h5>`
+  } catch (err) {
+    throw err.message
+  }
+}
+
+const cat_breeds = document.getElementById("cat_breed")
+async function getRandomCatBreeds() {
+  try {
+    const response = await axios({
+      url: base_url + `cat-finder`,
+      method: "get",
+      headers: {
+        access_token: localStorage.getItem("access_token")
+      }
+    })
+    let index = Math.floor(Math.random() * 67)
+    cat_breeds.innerHTML = `<br><h4>${response.data[index].name}</h4>`
   } catch (err) {
     throw err.message
   }
