@@ -18,4 +18,5 @@ class CatPictureController {
   }
 }
 
+
 module.exports = CatPictureController
