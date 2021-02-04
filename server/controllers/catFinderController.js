@@ -1,23 +1,19 @@
 const axios = require("axios")
-const CF_APIKEY = process.env.CF_APIKEY
 
 class CatFinderController {
-  static showAnimal(req, res, next) {
-    axios({
-      method: "GET",
-      url: `https://api.petfinder.com/v2/animals?type=cat`,
-      headers: {
-        Authorization: CF_APIKEY,
-      },
-    })
-      .then((animalsData) => {
-        const { animals } = animalsData.data
-        // console.log(animalsData);
-        res.status(200).json(animals)
+  static async showAnimal(req, res, next) {
+    try {
+      const respond = await axios ({
+        method: "GET",
+        url: `https://api.thecatapi.com/v1/breeds`,
+        headers: {
+          "x-api-key": process.env.KEY,
+        },
       })
-      .catch((err) => {
-        next(err)
-      })
+      res.status(200).json(respond.data)
+    } catch (err) {
+      next(err)
+    }
   }
 }
 
