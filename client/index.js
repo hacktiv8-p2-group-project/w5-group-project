@@ -163,6 +163,10 @@ function onSignIn(googleUser) {
     })
         .done((res) => {
             localStorage.setItem("access_token", res.access_token)
+            Toast.fire({
+                icon: "success",
+                title: "Signed in with google success! Meaow :3",
+            })
             auth()
         })
         .fail((xhr, txt) => {
@@ -225,13 +229,13 @@ async function getRandomCatBreeds() {
             title: `${response.data[index].name}`,
             html: `
             Did.... you know about me? :3 <br>
-            Here's me in full glory for 3 seconds. <br>
+            Here's me in full glory for 5 seconds. <br>
             meaow :3
             `,
             imageUrl: `${response.data[index].image.url}`,
             imageAlt: "Custom image",
             showConfirmButton: false,
-            timer: 3000,
+            timer: 5000,
             timerProgressBar: true,
             showCloseButton: true,
         })
