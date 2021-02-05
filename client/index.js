@@ -15,7 +15,6 @@ $(document).ready(() => {
   $("#registerform").on("submit", (e) => {
     e.preventDefault()
     register()
-    auth()
   })
   $("#logout").on("click", (e) => {
     e.preventDefault()
@@ -24,6 +23,16 @@ $(document).ready(() => {
       console.log('User signed out.');
     })
     localStorage.removeItem("access_token")
+    Swal.fire({
+      icon: 'success',
+      title: 'Success Logout',
+      backdrop: `
+        rgba(0,0,123,0.4)
+        url("nyat-cat.gif")
+        left top
+        no-repeat
+      `
+    })
     auth()
   })
   $("#cat_btn").click((e) => {
@@ -76,7 +85,17 @@ function login() {
       auth()
     })
     .fail((xhr, txt) => {
-      console.log("always")
+      console.log(xhr.responseJSON.message,"masukkkkkkkkkkk fail")
+      Swal.fire({
+        icon: 'error',
+        title: 'Wrong Password or Email',
+        backdrop: `
+          rgba(0,0,123,0.4)
+          url("nyat-cat.gif")
+          left top
+          no-repeat
+        `
+      })
       $("#loginform").trigger("reset")
     })
     .always((_) => {
@@ -103,7 +122,17 @@ function register() {
     })
     .fail((xhr, txt) => {
       console.log(xhr, txt)
-      auth()
+      Swal.fire({
+        icon: 'error',
+        title: 'Use Unique Email',
+        backdrop: `
+          rgba(0,0,123,0.4)
+          url("nyat-cat.gif")
+          left top
+          no-repeat
+        `
+      })
+      $("#registerform").trigger("reset")
     })
     .always((_) => {
       $("#registerform").trigger("reset")
