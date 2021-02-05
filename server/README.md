@@ -184,7 +184,7 @@ _Response (400 - Bad Request)_
 ---
 ### POST /login
 
-> Create access token for existing user
+> Create access token and login for existing user
 
 _Request Header_
 ```
@@ -202,7 +202,7 @@ _Request Body_
 _Response (200 - OK)_
 ```
 {
-    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBlbWFpbC5jb20iLCJpYXQiOjE2MTI0OTUzOTV9.SwESR1GLfnoDuUnTIb343ecQVGnfxQm6y1zr6uTvQ_4"
+    "access_token": "<your access token>"
 }
 ```
 
@@ -217,5 +217,46 @@ _Response (401 - Unauthorized)_
 ```
 {
   "msg": "Invalid Token"
+}
+```
+---
+### POST /googlelogin
+
+> Create new user and login using google account
+
+_Request Header_
+```
+{
+  "idToken": <your google token>
+  "audience": <your client id>
+}
+```
+
+_Request Body_
+```
+{
+  "email": "<email to get insert into>",
+  "password": "<password to get insert into>"
+}
+```
+
+_Response (200 - OK)_
+```
+{
+  "access_token": <your access token>
+}
+```
+
+_Response (201 - Created)_
+```
+{
+  "access_token": <your access token>
+}
+```
+
+_Response (400 - Bad Request)_
+```
+{
+  "msg": "Invalid requests"
 }
 ```
