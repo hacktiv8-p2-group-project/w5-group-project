@@ -18,76 +18,79 @@ class Controller {
             })
     }
 
-    static login(req, res, next) {
-        const { email, password } = req.body
-        User.findOne({
-            where: {
-                email,
-            },
-        }).then((user) => {
-            if (!user) {
-                throw {
-                    name: "CustomError",
-                    status: 400,
-                    message: "Wrong Username/Password",
-                }
-            }
 
-            let compared = comparePass(password, user.password)
-            if (!compared) {
-                throw {
-                    name: "CustomError",
-                    status: 400,
-                    message: "Wrong Username/Password",
-                }
-            } else {
-                const access_token = generateToken({
-                    id: user.id,
-                    email: user.email,
-                })
-                res.status(200).json({ access_token })
-            }
+  static login(req, res, next) {
+    const { email, password } = req.body
+    User.findOne({
+      where: {
+        email,
+      },
+    })
+      .then((user) => {
+        if (!user) {
+          throw {
+            name: "CustomError",
+            status: 400,
+            message: "Wrong Username/Password",
+          }
+        }
+        let compared = comparePass(password, user.password)
+        if (!compared) {
+          throw {
+            name: "CustomError",
+            status: 400,
+            message: "Wrong Username/Password",
+          }
+        } else {
+          const access_token = generateToken({
+            id: user.id,
+            email: user.email,
+          })
+          res.status(200).json({ access_token })
+        }
+      })
+      .catch(err => {
+        next(err)
+      })
+  }
+
+  static googleLogin(req, res, next) {
+    const client = new OAuth2Client(process.env.CLIENT_ID)
+    let email = ""
+    client.verifyIdToken({
+      idToken: req.body.google_token,
+      audience: process.env.CLIENT_ID,
+    })
+      .then((ticket) => {
+        const payload = ticket.getPayload()
+        email = payload.email
+        console.log(payload, "ini payload")
+        return User.findOne({ where: { email } })
+      })
+      .then((user) => {
+        if (!user) {
+          console.log("Registering with google")
+          return User.create({ email, password: "process.env.SECRET_GOOGLE" })
+        } else {
+          const access_token = generateToken({
+            id: user.id,
+            email: user.email,
+          })
+          res.status(200).json({ access_token: access_token })
+        }
+      })
+      .then((registeredUser) => {
+        console.log("Logining with google")
+        const access_token = generateToken({
+          id: registeredUser.id,
+          email: registeredUser.email,
         })
-    }
-
-    static googleLogin(req, res, next) {
-        const client = new OAuth2Client(process.env.CLIENT_ID)
-        let email = ""
-        client
-            .verifyIdToken({
-                idToken: req.body.google_token,
-                audience: process.env.CLIENT_ID,
-            })
-            .then((ticket) => {
-                const payload = ticket.getPayload()
-                // email = payload.email
-                console.log(payload, "ini payload")
-                return User.findOne({ where: { email: payload.email } })
-            })
-            .then((user) => {
-                if (!user) {
-                    console.log("Registering with google")
-                    return User.create({ email, password: process.env.SECRET_GOOGLE })
-                } else {
-                    const access_token = generateToken({
-                        id: registeredUser.id,
-                        email: registeredUser.email,
-                    })
-                    res.status(200).json(access_token)
-                }
-            })
-            .then((registeredUser) => {
-                console.log("Logining with google")
-                const access_token = generateToken({
-                    id: registeredUser.id,
-                    email: registeredUser.email,
-                })
-                res.status(201).json(access_token)
-            })
-            .catch((err) => {
-                next(err)
-            })
-    }
+        res.status(201).json({ access_token: access_token })
+      })
+      .catch((err) => {
+        next(err)
+      })
+  }
 }
 
 module.exports = Controller

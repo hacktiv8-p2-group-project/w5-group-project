@@ -7,7 +7,6 @@ class CatFactsController {
         method: "get",
         url: `https://cat-fact.herokuapp.com/facts/random`,
       })
-      // console.log(respond)
       res.status(200).json(respond.data.text)
     } catch (err) {
       next(err)
