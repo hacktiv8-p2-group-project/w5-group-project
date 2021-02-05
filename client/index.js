@@ -1,24 +1,28 @@
 $(document).ready(() => {
   auth()
-  $("#linkRegister").on("click", e => {
+  $("#linkRegister").on("click", (e) => {
     e.preventDefault()
     showRegister()
   })
-  $("#linkLogin").on("click", e => {
+  $("#linkLogin").on("click", (e) => {
     e.preventDefault()
     auth()
   })
-  $("#loginform").on("submit", e => {
+  $("#loginform").on("submit", (e) => {
     e.preventDefault()
     login()
   })
-  $("#registerform").on("submit", e => {
+  $("#registerform").on("submit", (e) => {
     e.preventDefault()
     register()
     auth()
   })
-  $("#logout").on("click", e => {
+  $("#logout").on("click", (e) => {
     e.preventDefault()
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    })
     localStorage.removeItem("access_token")
     auth()
   })
@@ -26,6 +30,10 @@ $(document).ready(() => {
     e.preventDefault()
     getRandomCatPicture()
     getRandomCatFacts()
+  })
+  $("#cat_btn_breed").click((e) => {
+    e.preventDefault()
+    getRandomCatBreeds()
   })
 })
 
@@ -60,17 +68,18 @@ function login() {
     method: "POST",
     data: {
       email,
-      password
-    }
+      password,
+    },
   })
-    .done(res => {
+    .done((res) => {
       localStorage.setItem("access_token", res.access_token)
       auth()
     })
     .fail((xhr, txt) => {
-      console.log(xhr, txt)
+      console.log("always")
+      $("#loginform").trigger("reset")
     })
-    .always(_ => {
+    .always((_) => {
       console.log("always")
       $("#loginform").trigger("reset")
     })
@@ -79,24 +88,24 @@ function login() {
 function register() {
   const email = $("#registeremail").val()
   const password = $("#registerpassword").val()
-  console.log(email, password);
+  console.log(email, password)
   $.ajax({
     url: base_url + "register",
     method: "POST",
     data: {
       email,
-      password
-    }
+      password,
+    },
   })
-    .done(res => {
-      console.log(res);
+    .done((res) => {
+      console.log(res)
       auth()
     })
     .fail((xhr, txt) => {
-      console.log(xhr, txt);
+      console.log(xhr, txt)
       auth()
     })
-    .always(_ => {
+    .always((_) => {
       $("#registerform").trigger("reset")
     })
 }
@@ -110,7 +119,8 @@ function onSignIn(googleUser) {
       google_token: id_token,
     },
   })
-    .done((res) => {
+    .done(res => {
+      localStorage.setItem("access_token", res.access_token)
       auth()
     })
     .fail((xhr, txt) => {
@@ -118,20 +128,20 @@ function onSignIn(googleUser) {
     })
 }
 
-function getRandomCatPicture() {
-  $.ajax({
-    url: base_url + `cat-pictures`,
-    method: "GET",
-    headers: {
-      access_token: localStorage.getItem("access_token")
-    }
-  })
-    .done(res => {
-      $("#cat_result").html(`<img src=${res[0].url} alt="cat" />`)
+const cat_result = document.getElementById("cat_result")
+async function getRandomCatPicture() {
+  try {
+    const response = await axios({
+      url: base_url + `cat-pictures`,
+      method: "get",
+      headers: {
+        access_token: localStorage.getItem("access_token"),
+      },
     })
-    .fail((xhr, txt) => {
-      console.log(xhr, txt);
-    })
+    cat_result.innerHTML = `<img src=${response.data[0].url} alt="cat" />`
+  } catch (err) {
+    throw err.message
+  }
 }
 
 // const cat_result = document.getElementById("cat_result")
@@ -157,10 +167,27 @@ async function getRandomCatFacts() {
       url: base_url + `cat-facts`,
       method: "get",
       headers: {
-        access_token: localStorage.getItem("access_token")
-      }
+        access_token: localStorage.getItem("access_token"),
+      },
     })
-    cat_fact.innerHTML = `<h3>${response.data}</h3>`
+    cat_fact.innerHTML = `<h5>${response.data}</h5>`
+  } catch (err) {
+    throw err.message
+  }
+}
+
+const cat_breeds = document.getElementById("cat_breed")
+async function getRandomCatBreeds() {
+  try {
+    const response = await axios({
+      url: base_url + `cat-finder`,
+      method: "get",
+      headers: {
+        access_token: localStorage.getItem("access_token"),
+      },
+    })
+    let index = Math.floor(Math.random() * 67)
+    cat_breeds.innerHTML = `<h5>${response.data[index].name}</h5>`
   } catch (err) {
     throw err.message
   }

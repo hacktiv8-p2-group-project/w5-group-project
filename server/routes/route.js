@@ -3,7 +3,7 @@ const router = express.Router()
 const Controller = require("../controllers/controller")
 const CatFactsController = require("../controllers/CatFactsController.js")
 const CatPictureController = require("../controllers/CatPictureController.js")
-const CatFinderController = require("../controllers/catFinderController")
+const CatFinderController = require("../controllers/CatFinderController")
 
 const { authenticate } = require("../middlewares/authenticate")
 const { authorize } = require("../middlewares/authorize")
