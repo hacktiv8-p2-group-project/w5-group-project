@@ -17,6 +17,10 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <!-- CSS -->
         <link rel="stylesheet" href="./index.css" />
+        <!-- Sweet ALert 2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script src="sweetalert2.min.js"></script>
+        <link rel="stylesheet" href="sweetalert2.min.css" />
         <!-- TITLE PAGE HERE -->
         <title>Cats Miaw Miaw</title>
     </head>
@@ -82,35 +86,37 @@
             </div>
             <!-- ? CAT PICTURE AND CAT FACT ? -->
             <div id="mainpage">
-                <!-- CAT PICTURE -->
+                <!-- CAT PICTURE AND FACTS -->
                 <div style="display: flex">
-                    <div id="cat_result" class="result">
-                        <p>Click the button to see the new me :3</p>
+                    <div id="cat_result" class="result" style="text-align: center">
+                        <p>
+                            Click the button to see the new me <br />
+                            meaow :3
+                        </p>
                     </div>
                     <div id="cat_fact" class="result" style="text-align: center">
-                        <p>Click the button to see my facts :3</p>
+                        <p>
+                            Click the button to see my facts <br />
+                            meaow :3
+                        </p>
                     </div>
                 </div>
                 <div class="buttons">
                     <button id="cat_btn">Get Cat Picture And Facts!</button>
                 </div>
-                <!-- CAT FINDER -->
+                <!-- CAT BREED RANDOMIZER -->
                 <br />
                 <div style="text-align: center">
-                    <p>
-                        psstt.. Did you know there are 67 breeds of cat? <br />
-                        Let's check how many you know them
-                    </p>
+                    <i><b>psstt.. Did you know there are 67 breeds of cat?</b></i> <br />
+                    Let's check how many you know them
+                    <div class="buttons">
+                        <button id="cat_btn_breed">Surprise me then :3</button>
+                    </div>
                 </div>
-                <div class="buttons">
-                    <button id="cat_btn_breed">Surprise me then :3</button>
-                </div>
-                <div id="cat_breed" style="text-align: center"></div>
             </div>
         </main>
         <!-- * =============== END OF INSIDE MAIN HERE =============== * -->
         <!-- MAIN JS SCRIPT -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <script src="index.js"></script>
         <!-- FOOTER -->
         <footer>

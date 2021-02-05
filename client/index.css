@@ -48,6 +48,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 2px solid;
+    border-radius: 25px;
 }
 
 .logout {
@@ -105,10 +107,13 @@ body {
     justify-content: center;
 }
 
+.cat-fact {
+    padding: 10px;
+}
+
 #loginsubmit,
 #registersubmit,
-#cat_btn,
-#cat_btn_breed {
+#cat_btn {
     background-color: darksalmon;
     border: 0;
     border-radius: 4px;
@@ -117,6 +122,24 @@ body {
     padding: 10px;
     margin: 10px;
     width: 300px;
+}
+
+#cat_btn_breed {
+    background-color: darksalmon;
+    border: 0;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+    padding: 5px;
+    margin: 5px;
+    width: 200px;
+}
+
+#loginsubmit:hover,
+#registersubmit:hover,
+#cat_btn:hover,
+#cat_btn_breed:hover {
+    opacity: 0.5;
 }
 
 button:active {
