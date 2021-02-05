@@ -1,5 +1,7 @@
 # Cat Miaw Miaw App Server
 
+Postman Published Documentation: https://documenter.getpostman.com/view/14405106/TW73G6PH
+
 ## RESTful endpoints
 ### GET /cat-pictures
 
