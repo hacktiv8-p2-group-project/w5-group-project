@@ -223,10 +223,19 @@ async function getRandomCatBreeds() {
                 access_token: localStorage.getItem("access_token"),
             },
         })
-        let index = Math.floor(Math.random() * 67)
+
+        const responseAgain = await axios({
+            url: base_url + `cat-breed`,
+            method: "get",
+            headers: {
+                access_token: localStorage.getItem("access_token"),
+            }
+        })
+
+        let index = Math.floor(Math.random() * 25)
         Swal.fire({
             heightAuto: false,
-            title: `${response.data[index].name}`,
+            title: `${responseAgain.data.data[index].breed}`,
             html: `
             Did.... you know about me? :3 <br>
             Here's me in full glory for 5 seconds. <br>
