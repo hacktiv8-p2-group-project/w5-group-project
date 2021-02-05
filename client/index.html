@@ -1,120 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- GOOGLE SIGN IN OAUTH 2.0 -->
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <meta name="google-signin-client_id" content="629294305574-79n4kjk6m3ucau4fcplatqp009cokkrq.apps.googleusercontent.com" />
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+            crossorigin="anonymous"
+        />
+        <!-- Axios -->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <!-- CSS -->
+        <link rel="stylesheet" href="./index.css" />
+        <!-- TITLE PAGE HERE -->
+        <title>Cats Miaw Miaw</title>
+    </head>
+    <!-- * BODY HTML HERE * -->
+    <body>
+        <!-- TOP SCRIPT START HERE -->
+        <!-- Jquery CDN -->
+        <script
+            src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous"
+        ></script>
+        <!-- SweetAlert CDN -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <!-- TOP SCRIPT END -->
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- GOOGLE SIGN IN OAUTH 2.0 -->
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id"
-        content="629294305574-79n4kjk6m3ucau4fcplatqp009cokkrq.apps.googleusercontent.com" />
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
-    <!-- Axios -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <!-- CSS -->
-    <link rel="stylesheet" href="./index.css" />
-    <!-- TITLE PAGE HERE -->
-    <title>Cats Miaw Miaw</title>
-</head>
-<!-- * BODY HTML HERE * -->
-
-<body>
-    <!-- TOP SCRIPT START HERE -->
-    <!-- Jquery CDN -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <!-- SweetAlert CDN -->
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <!-- TOP SCRIPT END -->
-
-    <!-- Header & Navbar -->
-    <header>
-        <nav id="navbar" class="navbar navbar-expand-md navbar-dark fixed-top">
-            <div class="container-fluid">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0"></ul>
-                <button id="logout" class="btn btn-outline-danger" type="submit">Logout</button>
-            </div>
-        </nav>
-    </header>
-    <!-- * =============== INSIDE MAIN HERE =============== * -->
-    <main>
-        <!-- ? LOGIN AND REGISTER ? -->
-        <div>
-            <!-- GOOGLE LOGIN -->
-            <div class="text-center">
-                <form id="loginform">
-                    <h3>Login</h3>
-                    <label>Email</label><br />
-                    <input type="email" id="loginemail" class="form-control" placeholder="Email address" required
-                        autofocus />
-
-                    <label>Password</label><br />
-                    <input type="password" id="loginpassword" class="form-control" placeholder="Password" required />
-
-                    <button id="loginsubmit" type="submit">Login</button><br />
-
-                    <p>Have an account? <a href="#" id="linkRegister">Register here</a></p>
-                    <div id="GoogleSignInButton" class="d-flex justify-content-center">
-                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                    </div>
-                </form>
-                <form id="registerform">
-                    <h3>Register</h3>
-                    <label>Email</label><br />
-                    <input type="email" id="registeremail" class="form-control" placeholder="Email address" required
-                        autofocus />
-                    <label>Password</label><br />
-
-                    <input type="password" id="registerpassword" class="form-control" placeholder="Password" required />
-
-                    <button id="registersubmit" type="submit">Register</button><br />
-
-                    <p>Already have an account? <a href="#" id="linkLogin">Login here</a></p>
-                    <div id="GoogleSignInButton" class="d-flex justify-content-center">
-                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <!-- ? CAT PICTURE AND CAT FACT ? -->
-        <div id="mainpage">
-            <!-- CAT PICTURE -->
-            <div style="display: flex">
-                <div id="cat_result" class="result">
-                    <p>Click the button to see the new me :3</p>
+        <!-- Header & Navbar -->
+        <header>
+            <nav id="navbar" class="navbar navbar-expand-md navbar-dark fixed-top">
+                <div class="container-fluid">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0"></ul>
+                    <button id="logout" class="btn btn-outline-danger" type="submit">Logout</button>
                 </div>
-                <div id="cat_fact" class="result" style="text-align: center">
-                    <p>Click the button to see my facts :3</p>
+            </nav>
+        </header>
+        <!-- * =============== INSIDE MAIN HERE =============== * -->
+        <main>
+            <!-- ? LOGIN AND REGISTER ? -->
+            <div>
+                <!-- GOOGLE LOGIN -->
+                <div class="text-center">
+                    <form id="loginform">
+                        <h3>Login</h3>
+                        <label>Email</label><br />
+                        <input type="email" id="loginemail" class="form-control" placeholder="Email address" required autofocus />
+
+                        <label>Password</label><br />
+                        <input type="password" id="loginpassword" class="form-control" placeholder="Password" required />
+
+                        <button id="loginsubmit" type="submit">Login</button><br />
+
+                        <p>Have an account? <a href="#" id="linkRegister">Register here</a></p>
+                        <div id="GoogleSignInButton" class="d-flex justify-content-center">
+                            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                        </div>
+                    </form>
+                    <form id="registerform">
+                        <h3>Register</h3>
+                        <label>Email</label><br />
+                        <input type="email" id="registeremail" class="form-control" placeholder="Email address" required autofocus />
+                        <label>Password</label><br />
+
+                        <input type="password" id="registerpassword" class="form-control" placeholder="Password" required />
+
+                        <button id="registersubmit" type="submit">Register</button><br />
+
+                        <p>Already have an account? <a href="#" id="linkLogin">Login here</a></p>
+                        <div id="GoogleSignInButton" class="d-flex justify-content-center">
+                            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="buttons">
-                <button id="cat_btn">Get Cat Picture And Facts!</button>
+            <!-- ? CAT PICTURE AND CAT FACT ? -->
+            <div id="mainpage">
+                <!-- CAT PICTURE -->
+                <div style="display: flex">
+                    <div id="cat_result" class="result">
+                        <p>Click the button to see the new me :3</p>
+                    </div>
+                    <div id="cat_fact" class="result" style="text-align: center">
+                        <p>Click the button to see my facts :3</p>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button id="cat_btn">Get Cat Picture And Facts!</button>
+                </div>
+                <!-- CAT FINDER -->
+                <br />
+                <div style="text-align: center">
+                    <p>
+                        psstt.. Did you know there are 67 breeds of cat? <br />
+                        Let's check how many you know them
+                    </p>
+                </div>
+                <div class="buttons">
+                    <button id="cat_btn_breed">Surprise me then :3</button>
+                </div>
+                <div id="cat_breed" style="text-align: center"></div>
             </div>
-            <!-- CAT FINDER -->
-            <br />
-            <div style="text-align: center">
-                <p>
-                    psstt.. Did you know there are 67 breeds of cat? <br />
-                    Let's check how many you know them
-                </p>
-            </div>
-            <div class="buttons">
-                <button id="cat_btn_breed">Surprise me then :3</button>
-            </div>
-            <div id="cat_breed" style="text-align: center"></div>
-        </div>
-    </main>
-    <!-- * =============== END OF INSIDE MAIN HERE =============== * -->
-    <!-- MAIN JS SCRIPT -->
-    <script src="index.js"></script>
-    <!-- FOOTER -->
-    <footer>
-        <!-- !!!!!INPUT CODE HERE!!!!! -->
-    </footer>
-    <!-- * END OF FOOTER * -->
-</body>
-<!-- * END OF BODY HTML HERE * -->
-
+        </main>
+        <!-- * =============== END OF INSIDE MAIN HERE =============== * -->
+        <!-- MAIN JS SCRIPT -->
+        <script src="index.js"></script>
+        <!-- FOOTER -->
+        <footer>
+            <!-- !!!!!INPUT CODE HERE!!!!! -->
+        </footer>
+        <!-- * END OF FOOTER * -->
+    </body>
+    <!-- * END OF BODY HTML HERE * -->
 </html>

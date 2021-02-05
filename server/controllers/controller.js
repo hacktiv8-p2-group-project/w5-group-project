@@ -4,19 +4,20 @@ const { generateToken, decoded } = require("../helpers/jwt")
 const { OAuth2Client } = require("google-auth-library")
 
 class Controller {
-  static register(req, res, next) {
-    const { email, password } = req.body
-    User.create({ email, password })
-      .then((data) => {
-        res.status(201).json({
-          id: data.id,
-          email: data.email,
-        })
-      })
-      .catch((err) => {
-        next(err)
-      })
-  }
+    static register(req, res, next) {
+        const { email, password } = req.body
+        User.create({ email, password })
+            .then((data) => {
+                res.status(201).json({
+                    id: data.id,
+                    email: data.email,
+                })
+            })
+            .catch((err) => {
+                next(err)
+            })
+    }
+
 
   static login(req, res, next) {
     const { email, password } = req.body

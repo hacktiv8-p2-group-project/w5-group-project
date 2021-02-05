@@ -144,22 +144,6 @@ async function getRandomCatPicture() {
   }
 }
 
-// const cat_result = document.getElementById("cat_result")
-// async function getRandomCatPicture() {
-//   try {
-//     const response = await axios({
-//       url: base_url + `cat-pictures`,
-//       method: "get",
-//       headers: {
-//         access_token: localStorage.getItem("access_token")
-//       }
-//     })
-//     cat_result.innerHTML = `<img src=${response.data[0].url} alt="cat" />`
-//   } catch (err) {
-//     throw err.message
-//   }
-// }
-
 const cat_fact = document.getElementById("cat_fact")
 async function getRandomCatFacts() {
   try {
